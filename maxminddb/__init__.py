@@ -9,6 +9,7 @@ from .const import (
     MODE_MEMORY,
     MODE_MMAP,
     MODE_MMAP_EXT,
+    MODE_BUFFER,
 )
 from .decoder import InvalidDatabaseError
 from .reader import Reader
@@ -27,6 +28,7 @@ __all__ = [
     "MODE_FILE",
     "MODE_MEMORY",
     "MODE_MMAP",
+    "MODE_BUFFER",
     "MODE_MMAP_EXT",
     "Reader",
     "open_database",
@@ -59,6 +61,7 @@ def open_database(
         MODE_MEMORY,
         MODE_MMAP,
         MODE_MMAP_EXT,
+        MODE_BUFFER,
     ):
         raise ValueError(f"Unsupported open mode: {mode}")
 
