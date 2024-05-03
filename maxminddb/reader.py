@@ -18,7 +18,7 @@ from ipaddress import IPv4Address, IPv6Address
 from os import PathLike
 from typing import Any, AnyStr, Dict, IO, List, Optional, Tuple, Union
 
-from maxminddb.const import MODE_AUTO, MODE_MMAP, MODE_FILE, MODE_MEMORY, MODE_FD
+from maxminddb.const import MODE_AUTO, MODE_MMAP, MODE_FILE, MODE_MEMORY, MODE_FD, MODE_BUFFER
 from maxminddb.decoder import Decoder
 from maxminddb.errors import InvalidDatabaseError
 from maxminddb.file import FileBuffer
@@ -79,6 +79,10 @@ class Reader:
             self._buffer = database.read()  # type: ignore
             self._buffer_size = len(self._buffer)  # type: ignore
             filename = database.name  # type: ignore
+        elif mode == MODE_BUFFER:
+            buf = database
+            self._buffer = buf
+            self._buffer_size = len(buf)
         else:
             raise ValueError(
                 f"Unsupported open mode ({mode}). Only MODE_AUTO, MODE_FILE, "
